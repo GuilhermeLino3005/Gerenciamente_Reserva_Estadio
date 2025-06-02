@@ -2,7 +2,7 @@ package estadio;
 
 import java.util.Scanner;
 
-public class Estadio {
+public class Estadio extends Local {
 
     private static Estadio instancia;
 
@@ -16,13 +16,17 @@ public class Estadio {
         return instancia;
     }
 
+    @Override
+    public void Apresentacao() {
+        System.out.println("1 - Maracanã ");
+    }
+
     public void executar() {
         Scanner leitor = new Scanner(System.in);
         int opcaoLocal, opcao, escolha, assento, fila;
 
         SetorFactory setorFactory = SetorFactory.getInstance();
         AssentoFactory assentoFactory = new AssentoFactory();
-        Local Localidade = Local.getInstance();
 
         Setor setorSul = setorFactory.criarSetor(1, "Setor Sul");
         Setor setorNorte = setorFactory.criarSetor(2, "Setor Norte");
@@ -43,8 +47,8 @@ public class Estadio {
         Assento assentoSelecionado = null;
 
         do {
-            System.out.println("DIgite o número do estádio que deseja acessar ");
-            Localidade.Apresentacao();
+            System.out.println("Digite o número do estádio que deseja acessar ");
+            this.Apresentacao();
             System.out.println("0 - Sair ");
 
             opcaoLocal = leitor.nextInt();
@@ -130,7 +134,6 @@ public class Estadio {
 
                     } while (opcao != 0);
 
-                    leitor.close();
                     break;
                 case 0:
                     System.out.println("Saindo...");
@@ -139,6 +142,7 @@ public class Estadio {
                     System.out.println("Opção inválida. Tente novamente.");
             }
         } while (opcaoLocal != 0);
+        leitor.close();
     }
 
     public static void main(String[] args) {
